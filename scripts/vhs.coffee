@@ -4,6 +4,12 @@
 # Dependencies:
 #   "<module name>": "<module version>"
 #
+# Configuration:
+#   HUBOT_TWIT_CONSUMER_KEY
+#   HUBOT_TWIT_CONSUMER_SECRET
+#   HUBOT_TWIT_ACCESS_TOKEN
+#   HUBOT_TWIT_ACCESS_SECRET
+#
 # Commands:
 #   hubot block twitter user (name) - blocks that twitter user, their tweets won't show up
 #   hubot unblock twitter user (name) - unblock that twitter user
