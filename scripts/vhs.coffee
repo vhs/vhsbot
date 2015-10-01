@@ -47,7 +47,7 @@ module.exports = (robot) ->
       robot.messageRoom '#vhs-pr', text
       console.log text
 
-  from_vhs = T.stream('statuses/filter', { track: 24754042 })
+  from_vhs = T.stream('statuses/filter', { follow: 24754042 })
   from_vhs.on 'tweet', (msg) ->
     console.log 'got tweet from ' + msg.user.screen_name + ': ' + msg.tweet
     console.log msg
