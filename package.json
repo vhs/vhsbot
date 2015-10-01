@@ -1,6 +1,6 @@
 {
   "name": "vhsbot",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "author": "Sean Patrick Hagen <sean.hagen@gmail.com>",
   "description": "Helpful robot for VHS Slack chat.",
