@@ -1,9 +1,9 @@
 #!/bin/bash
 
-export HUBOT_TWIT_CONSUMER_KEY=some-consumer-key-from-twitter
-export HUBOT_TWIT_CONSUMER_SECRET=from-consumer-secret-from-twitter
-export HUBOT_TWIT_ACCESS_TOKEN=some-access-token-from-twitter
-export HUBOT_TWIT_ACCESS_SECRET=some-access-secret-from-twitter
+export HUBOT_TWITTER_CONSUMER_KEY=some-consumer-key-from-twitter
+export HUBOT_TWITTER_CONSUMER_SECRET=from-consumer-secret-from-twitter
+export HUBOT_TWITTER_ACCESS_TOKEN=some-access-token-from-twitter
+export HUBOT_TWITTER_ACCESS_SECRET=some-access-secret-from-twitter
 export HUBOT_SLACK_TOKEN=some-slack-token-from-well-slack
 
 bin/hubot --adapter slack
