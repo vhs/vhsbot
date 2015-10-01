@@ -38,15 +38,19 @@ module.exports = (robot) ->
     access_token_secret:  access_secret
   })
 
-  stream = T.stream('user', { with: 'user', track: '@VHS' })
-
-  stream.on 'tweet', (msg) ->
+  mention = T.stream('user', { with: 'user', track: '@VHS' })
+  mention.on 'tweet', (msg) ->
     ignoreUsers = robot.brain.get('vhs-ignore-twitter-users') or []
     name = msg.user.screen_name
     if not ignoreUsers.include? name
       text = 'got tweet from ' + name + ': ' + msg.text
       robot.messageRoom '#vhs-pr', text
       console.log text
+
+  from_vhs = T.stream('statuses/filter', { track: 24754042 })
+  from_vhs.on 'tweet', (msg) ->
+    console.log 'got tweet from ' + msg.user.screen_name + ': ' + msg.tweet
+    console.log msg
 
   robot.respond /block twitter user (.*)/, (res) ->
     ignoreUsers = robot.brain.get('vhs-ignore-twitter-users') or []
