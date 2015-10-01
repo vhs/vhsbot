@@ -38,6 +38,10 @@ Then you can interact with vhsbot by typing `vhsbot help`.
     vhsbot help - Displays all of the help commands that vhsbot knows about.
     ...
 
+To run vhsbot in production, you'll need to create a file at `bin/run`. It needs to contain all of the environment variables required to run vhsbot. You can see an example in `bin/run.example`. You can rename this file, and use chmod to make it executable: `chmod 755 bin/run`. Once that's all set up, you can just run the following to connect vhsbot to Slack:
+
+    % bin/run
+
 ### Configuration
 
 A few scripts (including some installed by default) require environment
