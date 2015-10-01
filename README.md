@@ -12,6 +12,10 @@ has, etc!
 [hubot]: http://hubot.github.com
 [generator-hubot]: https://github.com/github/generator-hubot
 
+### How To Write Hubot Scripts
+
+[Take a look here](https://github.com/github/hubot/blob/master/docs/scripting.md#npm-packages)
+
 ### Running vhsbot Locally
 
 You can test your hubot by running the following, however some plugins will not
