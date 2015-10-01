@@ -49,8 +49,8 @@ module.exports = (robot) ->
 
   from_vhs = T.stream('statuses/filter', { follow: 24754042 })
   from_vhs.on 'tweet', (msg) ->
-    console.log 'got tweet from ' + msg.user.screen_name + ': ' + msg.tweet
-    console.log msg
+    text = 'got tweet from ' + msg.user.screen_name + ': ' + msg.text
+    robot.messageRoom '#vhs-pr', text
 
   robot.respond /block twitter user (.*)/, (res) ->
     ignoreUsers = robot.brain.get('vhs-ignore-twitter-users') or []
