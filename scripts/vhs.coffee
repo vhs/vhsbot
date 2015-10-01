@@ -8,7 +8,7 @@
 #   HUBOT_TWITTER_CONSUMER_KEY
 #   HUBOT_TWITTER_CONSUMER_SECRET
 #   HUBOT_TWITTER_ACCESS_TOKEN
-#   HUBOT_TWITTER_ACCESS_SECRET
+#   HUBOT_TWITTER_ACCESS_TOKEN_SECRET
 #
 # Commands:
 #   hubot block twitter user (name) - blocks that twitter user, their tweets won't show up
@@ -30,7 +30,7 @@ module.exports = (robot) ->
   consumer_key = process.env.HUBOT_TWITTER_CONSUMER_KEY
   consumer_secret = process.env.HUBOT_TWITTER_CONSUMER_SECRET
   access_token = process.env.HUBOT_TWITTER_ACCESS_TOKEN
-  access_secret = process.env.HUBOT_TWITTER_ACCESS_SECRET
+  access_secret = process.env.HUBOT_TWITTER_ACCESS_TOKEN_SECRET
   T = new Twit({
     consumer_key:         consumer_key,
     consumer_secret:      consumer_secret,
