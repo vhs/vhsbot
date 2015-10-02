@@ -1,0 +1,19 @@
+#!/bin/bash
+
+export HUBOT_TWITTER_CONSUMER_KEY=some-consumer-key-from-twitter
+export HUBOT_TWITTER_CONSUMER_SECRET=from-consumer-secret-from-twitter
+export HUBOT_TWITTER_ACCESS_TOKEN=some-access-token-from-twitter
+export HUBOT_TWITTER_ACCESS_TOKEN_SECRET=some-access-secret-from-twitter
+export HUBOT_SLACK_TOKEN=some-slack-token-from-well-slack
+export HUBOT_MUTE_ROOM_PREFIX="#"
+export EXPRESS_PORT=8080
+
+docker run --rm -it \
+       -e "HUBOT_TWITTER_CONSUMER_KEY=$HUBOT_TWITTER_CONSUMER_KEY" \
+       -e "HUBOT_TWITTER_CONSUMER_SECRET=$HUBOT_TWITTER_CONSUMER_SECRET" \
+       -e "HUBOT_TWITTER_ACCESS_TOKEN=$HUBOT_TWITTER_ACCESS_TOKEN" \
+       -e "HUBOT_TWITTER_ACCESS_TOKEN_SECRET=$HUBOT_TWITTER_ACCESS_TOKEN_SECRET" \
+       -e "HUBOT_SLACK_TOKEN=$HUBOT_SLACK_TOKEN" \
+       -e "HUBOT_MUTE_ROOM_PREFIX=$HUBOT_MUTE_ROOT_PREFIX" \
+       -e "EXPRESS_PORT=$EXPRESS_PORT" \
+       hubot
