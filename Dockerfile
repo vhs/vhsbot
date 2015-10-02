@@ -21,7 +21,13 @@ RUN /etc/init.d/redis-server start
 EXPOSE 8080
 
 # Create Hubot
-WORKDIR /root
-RUN hubot --create mybot
-WORKDIR /root/mybot
-RUN npm install
+RUN	adduser hubot -h /hubot -s /bin/sh -D
+USER hubot
+WORKDIR /hubot
+
+COPY bot /hubot
+
+
+# RUN hubot --create mybot
+# WORKDIR /root/mybot
+# RUN npm install
