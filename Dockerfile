@@ -18,6 +18,8 @@ RUN \
 EXPOSE 6379
 RUN /etc/init.d/redis-server start
 
+EXPOSE 8080
+
 # Create Hubot
 WORKDIR /root
 RUN hubot --create mybot
