@@ -38,22 +38,36 @@ module.exports = (robot) ->
     access_token_secret:  access_secret
   })
 
-  mention = T.stream('user', { with: 'user', track: '@VHS' })
-  mention.on 'tweet', (msg) ->
+  vhs_account_twitter_id = 24754042
+  ignoreUsers = []
+  robot.brain.on 'loaded', =>
     ignoreUsers = robot.brain.get('vhs-ignore-twitter-users') or []
-    name = msg.user.screen_name
-    if not ignoreUsers.include? name
-      text = 'got tweet from ' + name + ': ' + msg.text
-      robot.messageRoom '#vhs-pr', text
-      console.log text
 
-  from_vhs = T.stream('statuses/filter', { follow: 24754042 })
-  from_vhs.on 'tweet', (msg) ->
+  mention = T.stream('user', { with: 'user', track: '@VHS' })
+  mention.on 'tweet', (msg) =>
+    name = msg.user.screen_name
+    rt_name = ''
+    if 'retweeted_status' of msg
+      rt_name = msg.retweeted_status.user.screen_name
+    if 'quoted_status' of msg
+      rt_name = msg.quoted_status.user.screen_name
+
+    ignoredUser = name in ignoreUsers
+    ignoredUserRetweet = rt_name in ignoreUsers
+    if ignoredUser or ignoredUserRetweet
+      return
+
+    text = 'got tweet from ' + name + ': ' + msg.text
+    robot.messageRoom '#vhs-pr', text
+
+  from_vhs = T.stream('statuses/filter', { follow: vhs_account_twitter_id })
+  from_vhs.on 'tweet', (msg) =>
+    if msg.user.id == vhs_account_twitter_id
+      return
     text = 'got tweet from ' + msg.user.screen_name + ': ' + msg.text
     robot.messageRoom '#vhs-pr', text
 
-  robot.respond /block twitter user (.*)/, (res) ->
-    ignoreUsers = robot.brain.get('vhs-ignore-twitter-users') or []
+  robot.respond /block twitter user (.*)/, (res) =>
     name = res.match[1]
     if not ignoreUsers.include? name
       res.reply "Alrighty, I'll ignore @"+name+" from now on"
@@ -62,8 +76,7 @@ module.exports = (robot) ->
     else
       res.reply "I'm already blocking that user!"
 
-  robot.respond /unblock twitter user (.*)/, (res) ->
-    ignoreUsers = robot.brain.get('vhs-ignore-twitter-users') or []
+  robot.respond /unblock twitter user (.*)/, (res) =>
     name = res.match[1]
     if ignoreUsers.include? name
       res.reply "Alrighty, I'll stop ignoring @"+res.match[1]+" from now on"
@@ -73,8 +86,5 @@ module.exports = (robot) ->
     else
       res.reply "I'm not ignoring anybody on Twitter named @"+name+"!"
 
-  robot.respond /what twitter users are you blocking/, (res) ->
-    ignoreUsers = robot.brain.get('vhs-ignore-twitter-users') or []
-    res.reply "These are the Twitter users I'm ignoring right now"
-    for user in ignoreUsers
-      res.reply "  "+user
+  robot.respond /what twitter users are you blocking/, (res) =>
+    res.reply "These are the Twitter users I'm ignoring right now: " + ignoreUsers.join ', '
