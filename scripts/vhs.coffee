@@ -39,7 +39,9 @@ module.exports = (robot) ->
   })
 
   vhs_account_twitter_id = 24754042
-  ignoreUsers = robot.brain.get('vhs-ignore-twitter-users') or []
+  ignoreUsers = []
+  robot.brain.on 'loaded', =>
+    ignoreUsers = robot.brain.get('vhs-ignore-twitter-users') or []
 
   mention = T.stream('user', { with: 'user', track: '@VHS' })
   mention.on 'tweet', (msg) =>
