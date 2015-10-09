@@ -49,6 +49,8 @@ module.exports = (robot) ->
     rt_name = ''
     if 'retweeted_status' of msg
       rt_name = msg.retweeted_status.user.screen_name
+    if 'quoted_status' of msg
+      rt_name = msg.quoted_status.user.screen_name
 
     ignoredUser = name in ignoreUsers
     ignoredUserRetweet = rt_name in ignoreUsers
@@ -58,29 +60,12 @@ module.exports = (robot) ->
     text = 'got tweet from ' + name + ': ' + msg.text
     robot.messageRoom '#vhs-pr', text
 
-    # # more complicated way:
-    # ignored_retweets = robot.brain.get('vhs-ignore-retweets') or []
-    # if 'retweeted_status' of msg
-    #   console.log 'this is a retweet!'
-    #   if msg.retweet_status.id in ignored_retweets
-    #     console.log "it's in the ignore list, returning"
-    #     return
-    #   recent_retweets = robot.brain.get('vhs-recent-retweets') or []
-    #   retweet =
-    #     id: msg.retweet_status.id
-    #     text: msg.retweet_status.text
-    #   if recent_retweets.length >= 5
-    #     recent_retweets.shift()
-    #   recent_retweets.push retweet
-    #   robot.brain.set 'vhs-recent-rewteets', recent_retweets
-
   from_vhs = T.stream('statuses/filter', { follow: vhs_account_twitter_id })
   from_vhs.on 'tweet', (msg) =>
     if msg.user.id == vhs_account_twitter_id
       return
     text = 'got tweet from ' + msg.user.screen_name + ': ' + msg.text
     robot.messageRoom '#vhs-pr', text
-
 
   robot.respond /block twitter user (.*)/, (res) =>
     name = res.match[1]
@@ -102,4 +87,4 @@ module.exports = (robot) ->
       res.reply "I'm not ignoring anybody on Twitter named @"+name+"!"
 
   robot.respond /what twitter users are you blocking/, (res) =>
-    res.reply "These are the Twitter users I'm ignoring right now: " + ignoreUsers.join ','
+    res.reply "These are the Twitter users I'm ignoring right now: " + ignoreUsers.join ', '
