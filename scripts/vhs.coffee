@@ -102,4 +102,4 @@ module.exports = (robot) ->
       res.reply "I'm not ignoring anybody on Twitter named @"+name+"!"
 
   robot.respond /what twitter users are you blocking/, (res) =>
-    res.reply "These are the Twitter users I'm ignoring right now: " ignoreUsers.join ','
+    res.reply "These are the Twitter users I'm ignoring right now: " + ignoreUsers.join ','
