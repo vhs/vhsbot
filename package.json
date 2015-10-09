@@ -19,6 +19,7 @@
     "hubot-scripts": "^2.16.2",
     "hubot-shipit": "^0.2.0",
     "hubot-slack": "^3.3.0",
+    "time_ago_in_words": "^1.2.1",
     "twit": "^2.1.0",
     "underscore": "^1.8.3"
   },
