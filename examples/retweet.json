@@ -115,7 +115,7 @@
         "entities": {
             "hashtags": [],
             "urls": [],
-            "user_mentions": "[JavaScript Object]",
+            "user_mentions": "JavaScript Object",
             "symbols": []
         },
         "favorited": false,
@@ -129,7 +129,7 @@
     "entities": {
         "hashtags": [],
         "urls": [],
-        "user_mentions": [ "[JavaScript Object]", "[JavaScript Object]", "[JavaScript Object]" ],
+        "user_mentions": [ "JavaScript Object", "JavaScript Object", "JavaScript Object" ],
         "symbols": []
     },
     "favorited": false,
