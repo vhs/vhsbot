@@ -46,7 +46,6 @@ get_free_book = (msg, robot) =>
         book_reply msg, title, countdown
 
   else
-    console.log 'woooooo'
     title = robot.brain.get 'packt-title'
     countdown = robot.brain.get 'packt-countdown'
     book_reply msg, title, countdown
