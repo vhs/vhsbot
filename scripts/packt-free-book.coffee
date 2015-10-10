@@ -15,6 +15,7 @@
 #   seanhagen
 #
 cheerio = require 'cheerio'
+cron = require('cron').CronJob
 
 free_book_url = "https://www.packtpub.com/packt/offers/free-learning"
 
@@ -25,6 +26,10 @@ module.exports = (robot) ->
 
   robot.respond /todays free book/, (msg) ->
     get_free_book msg, robot
+
+  cron '12 0 * * *', () =>
+    robot.messageRoom '#random'
+
 
 
 get_free_book = (msg, robot) =>
