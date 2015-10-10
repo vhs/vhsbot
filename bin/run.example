@@ -7,6 +7,7 @@ export HUBOT_TWITTER_ACCESS_TOKEN_SECRET=some-access-secret-from-twitter
 export HUBOT_SLACK_TOKEN=some-slack-token-from-well-slack
 export HUBOT_MUTE_ROOM_PREFIX="#"
 export HUBOT_PACKT_CRON='0 12 * * *' # every day at noon
+export HUBOT_PACKT_ROOM='#random' # slack '#random' room
 
 export EXPRESS_PORT=8080
 

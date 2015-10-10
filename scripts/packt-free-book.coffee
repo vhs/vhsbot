@@ -10,6 +10,7 @@
 #
 # Configuration
 #   HUBOT_PACKT_CRON
+#   HUBOT_PACKT_ROOM
 #
 # Notes:
 #   Lookit all this coffeescript!
@@ -31,7 +32,7 @@ module.exports = (robot) ->
     get_free_book msg.message.room, robot
 
   func = () =>
-    get_free_book '#random', robot
+    get_free_book process.env.HUBOT_PACKT_ROOM, robot
 
   job = new cron
     cronTime: process.env.HUBOT_PACKT_CRON
