@@ -8,6 +8,10 @@
 #   hubot what's the free book today
 #   hubot todays free book
 #
+# Configuration
+#   HUBOT_PACKT_CRON
+#   HUBOT_PACKT_ROOM
+#
 # Notes:
 #   Lookit all this coffeescript!
 #
@@ -15,19 +19,30 @@
 #   seanhagen
 #
 cheerio = require 'cheerio'
+cron = require('cron').CronJob
 
 free_book_url = "https://www.packtpub.com/packt/offers/free-learning"
 
 module.exports = (robot) ->
 
   robot.respond /what.s the free book today/, (msg) ->
-    get_free_book msg, robot
+    get_free_book msg.message.room, robot
 
   robot.respond /todays free book/, (msg) ->
-    get_free_book msg, robot
+    get_free_book msg.message.room, robot
 
+  func = () =>
+    get_free_book process.env.HUBOT_PACKT_ROOM, robot
 
-get_free_book = (msg, robot) =>
+  job = new cron
+    cronTime: process.env.HUBOT_PACKT_CRON
+    onTick: func
+    start: false
+    timeZone: 'America/Vancouver'
+
+  job.start()
+
+get_free_book = (room, robot) =>
   countdown = robot.brain.get('packt-countdown') or null
   if countdown?
     countdown *= 1000
@@ -43,14 +58,14 @@ get_free_book = (msg, robot) =>
         robot.brain.set 'packt-countdown', countdown
         robot.brain.set 'packt-title', title
 
-        book_reply msg, title, countdown
+        book_reply room, robot, title, countdown
 
   else
     title = robot.brain.get 'packt-title'
     countdown = robot.brain.get 'packt-countdown'
-    book_reply msg, title, countdown
+    book_reply room, robot, title, countdown
 
-book_reply = (msg, title, countdown) ->
+book_reply = (room, robot, title, countdown) ->
   now = Date.now()
   countdown *= 1000
 
@@ -58,5 +73,5 @@ book_reply = (msg, title, countdown) ->
   diffHrs = Math.floor((hourDiff % 86400000) / 3600000);
   diffMins = Math.round(((hourDiff % 86400000) % 3600000) / 60000);
 
-  msg.reply "Packt free book of the day: " + title
-  msg.reply "There is " + diffHrs + " hours and " + diffMins + " minutes left to claim this book!"
+  robot.messageRoom room, "Packt free book of the day: " + title
+  robot.messageRoom room, "There is " + diffHrs + " hours and " + diffMins + " minutes left to claim this book!"
