@@ -5,8 +5,6 @@
   "author": "Sean Patrick Hagen <sean.hagen@gmail.com>",
   "description": "Helpful robot for VHS Slack chat.",
   "dependencies": {
-    "cheerio": "^0.19.0",
-    "cron": "^1.0.9",
     "hubot": "^2.16.0",
     "hubot-diagnostics": "0.0.1",
     "hubot-google-images": "^0.2.2",
@@ -14,6 +12,7 @@
     "hubot-help": "^0.1.1",
     "hubot-maps": "0.0.2",
     "hubot-mute": "0.0.9",
+    "hubot-packt-free-book": "0.0.2",
     "hubot-pugme": "^0.1.0",
     "hubot-redis-brain": "0.0.3",
     "hubot-rules": "^0.1.1",
