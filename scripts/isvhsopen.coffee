@@ -17,7 +17,7 @@
 timeago = require 'time_ago_in_words'
 
 module.exports = (robot) ->
-  api_url = "http://api.hackspace.ca/s/vhs/data/door.json"
+  api_url = "http://api.vanhack.ca/s/vhs/data/door.json"
 
   is_vhs_open = (res) =>
     robot.http(api_url)
